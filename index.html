@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10 🌸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --pink-primary: #ff4d8d;
+      --pink-light: #ff9ebb;
+      --gold: #ffd166;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 192, 218, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #4d1342 0%, #260822 55%, #120311 100%);
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Canvas hiệu ứng cánh hoa rơi nền */
+    #petal-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ==================== MÀN HÌNH BẤT NGỜ MỞ ĐẦU ==================== */
+    #surprise-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #3f0e36 0%, #140312 100%);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #surprise-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 182, 210, 0.3);
+      border-radius: 28px;
+      padding: 32px 24px;
+      width: 100%;
+      max-width: 410px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(255, 77, 141, 0.22);
+      position: relative;
+    }
+
+    .radar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 77, 141, 0.22);
+      border: 1px solid rgba(255, 77, 141, 0.5);
+      color: #ffb8d0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      animation: pulseBadge 1.8s infinite;
+    }
+
+    @keyframes pulseBadge {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 77, 141, 0.45); }
+      50% { box-shadow: 0 0 0 10px rgba(255, 77, 141, 0); }
+    }
+
+    .intro-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.35rem;
+      background: linear-gradient(90deg, #fff, #ff9ebb, #ffd166);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .intro-desc {
+      font-size: 0.94rem;
+      color: #f3d8e6;
+      line-height: 1.65;
+      margin-bottom: 26px;
+    }
+
+    .btn-group-prank {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      min-height: 115px;
+      position: relative;
+    }
+
+    .btn-accept {
+      background: linear-gradient(135deg, #ff4d8d 0%, #ff758c 100%);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      max-width: 270px;
+      box-shadow: 0 10px 25px rgba(255, 77, 141, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-accept:active {
+      transform: scale(0.96);
+    }
+
+    .btn-runaway {
+      background: rgba(255, 255, 255, 0.12);
+      color: #e2c2d3;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      padding: 10px 22px;
+      border-radius: 99px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    /* Màn 2 của Intro: Đánh thức Hoa Hồng */
+    #stage-bloom {
+      display: none;
+    }
+
+    .crystal-rose-btn {
+      width: 120px;
+      height: 120px;
+      margin: 10px auto 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,77,141,0.38) 0%, rgba(255,255,255,0.06) 70%);
+      border: 2px solid rgba(255, 158, 187, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3.6rem;
+      cursor: pointer;
+      box-shadow: 0 0 35px rgba(255, 77, 141, 0.4);
+      user-select: none;
+      transition: transform 0.15s ease;
+      animation: floatRose 2.5s ease-in-out infinite;
+    }
+
+    .crystal-rose-btn:active {
+      transform: scale(0.88);
+    }
+
+    @keyframes floatRose {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .love-progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 12px 0 8px;
+      border: 1px solid rgba(255, 158, 187, 0.3);
+    }
+
+    .love-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff4d8d, #ffd166);
+      border-radius: 99px;
+      transition: width 0.25s ease;
+    }
+
+    .love-percent-text {
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ==================== THANH ĐIỀU HƯỚNG & NÚT NHẠC ==================== */
+    .top-nav-wrapper {
+      position: fixed;
+      top: 14px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+      padding: 0 12px;
+      pointer-events: none;
+    }
+
+    .top-nav {
+      pointer-events: auto;
+      display: flex;
+      gap: 6px;
+      background: rgba(34, 8, 30, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      padding: 6px 10px;
+      border-radius: 99px;
+      overflow-x: auto;
+      max-width: 100%;
+      scrollbar-width: none;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .top-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .top-nav a {
+      color: #f3dce8;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 99px;
+      white-space: nowrap;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .top-nav a.active,
+    .top-nav a:hover {
+      background: linear-gradient(135deg, #ff4d8d, #ff758c);
+      color: #fff;
+    }
+
+    /* Nút nhạc đặt ở góc dưới bên phải để không bao giờ đè menu */
+    .music-fab {
+      position: fixed;
+      bottom: 22px;
+      right: 18px;
+      z-index: 120;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(45, 10, 38, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 140, 180, 0.55);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255, 77, 141, 0.4);
+    }
+
+    .music-disc {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff4d8d 22%, #1f081c 25%, #381030 60%, #140412 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: spinDisc 4s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .music-fab.playing .music-disc {
+      animation-play-state: running;
+    }
+
+    .music-disc::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #ffd166;
+      border-radius: 50%;
+    }
+
+    @keyframes spinDisc {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ==================== BỐ CỤC CHÍNH ==================== */
+    main {
+      position: relative;
+      z-index: 5;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 80px 18px 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    .section-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 30px 22px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    /* HERO SECTION */
+    .emblem-ring {
+      position: relative;
+      width: 145px;
+      height: 145px;
+      margin: 8px auto 20px;
+      border-radius: 50%;
+      padding: 5px;
+      background: linear-gradient(135deg, #ff4d8d, #ffd166, #ff9ebb);
+      box-shadow: 0 0 35px rgba(255, 77, 141, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .emblem-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #5e1650, #240820);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4.2rem;
+      border: 3px solid #240820;
+    }
+
+    .crown-icon {
+      position: absolute;
+      top: -16px;
+      right: 6px;
+      font-size: 2.1rem;
+      transform: rotate(18deg);
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    }
+
+    .date-pill {
+      display: inline-block;
+      background: rgba(255, 209, 102, 0.14);
+      border: 1px solid rgba(255, 209, 102, 0.45);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 99px;
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.6rem;
+      background: linear-gradient(90deg, #ffd166, #ff9ebb, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .hero-quote {
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: #f3d7e6;
+      margin-bottom: 24px;
+    }
+
+    /* BẢNG CHỈ SỐ HẠNH PHÚC 20/10 */
+    .stats-box {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 192, 218, 0.18);
+      border-radius: 20px;
+      padding: 16px 12px;
+    }
+
+    .stats-label {
+      font-size: 0.84rem;
+      color: #f5c6dc;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .stats-label span {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .stat-item {
+      background: rgba(255, 77, 141, 0.15);
+      border: 1px solid rgba(255, 158, 187, 0.24);
+      border-radius: 14px;
+      padding: 10px 4px;
+    }
+
+    .stat-num {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stat-unit {
+      font-size: 0.72rem;
+      color: #e6bfd2;
+      margin-top: 4px;
+    }
+
+    /* THẺ XIN VÍA MAY MẮN 20/10 */
+    .section-heading {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.15rem;
+      color: #ff9ebb;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 0.86rem;
+      color: #dab5c8;
+      margin-bottom: 20px;
+    }
+
+    .voucher-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .voucher-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,77,141,0.08));
+      border: 1px dashed rgba(255, 182, 210, 0.45);
+      border-radius: 18px;
+      padding: 16px 12px;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .voucher-card:active {
+      transform: scale(0.96);
+    }
+
+    .voucher-card.claimed {
+      border-style: solid;
+      border-color: var(--gold);
+      background: linear-gradient(145deg, rgba(255, 209, 102, 0.2), rgba(255, 77, 141, 0.2));
+    }
+
+    .voucher-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .voucher-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffd166;
+      margin-bottom: 4px;
+    }
+
+    .voucher-desc {
+      font-size: 0.78rem;
+      color: #f3dce8;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .voucher-status {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(255, 77, 141, 0.3);
+      color: #ffc2d6;
+    }
+
+    .voucher-card.claimed .voucher-status {
+      background: var(--gold);
+      color: #2b0824;
+    }
+
+    /* GÓC TÔN VINH PHÁI ĐẸP (POLAROID) */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .polaroid {
+      background: #fff;
+      padding: 8px 8px 14px;
+      border-radius: 14px;
+      color: #2b0b25;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .polaroid:nth-child(odd) {
+      transform: rotate(-2deg);
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.04);
+      z-index: 5;
+    }
+
+    .polaroid img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 9px;
+      margin-bottom: 8px;
+    }
+
+    .polaroid-caption {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #b51756;
+    }
+
+    /* BỨC THƯ CHÚC MỪNG 20/10 */
+    .envelope-box {
+      background: linear-gradient(160deg, #fff8fa 0%, #ffe3ee 100%);
+      color: #3a102d;
+      border-radius: 22px;
+      padding: 24px 20px;
+      text-align: left;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .letter-greeting {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.85rem;
+      color: #c91860;
+      margin-bottom: 12px;
+    }
+
+    .letter-body {
+      font-size: 0.94rem;
+      line-height: 1.75;
+      color: #471637;
+      min-height: 150px;
+      white-space: pre-line;
+    }
+
+    .letter-sign {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #c91860;
+      text-align: right;
+      margin-top: 16px;
+    }
+
+    .btn-replay-fireworks {
+      margin-top: 18px;
+      background: linear-gradient(135deg, #ff4d8d, #ff85a1);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 77, 141, 0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hiệu ứng cánh hoa đào rơi -->
+  <canvas id="petal-canvas"></canvas>
+
+  <!-- ==================== MÀN HÌNH BẤT NGỜ ĐẦU TIÊN ==================== -->
+  <div id="surprise-overlay">
+    <div class="intro-card">
+      <!-- BƯỚC 1: HỎI NHẬN QUÀ & NÚT CHẠY TRỐN -->
+      <div id="stage-prank">
+        <div class="radar-badge">✨ HỆ THỐNG QUÉT NHAN SẮC 20/10 ✨</div>
+        <h2 class="intro-title">Chào người đẹp đang xem! 🌸</h2>
+        <p class="intro-desc">
+          Hệ thống vừa phát hiện một cô gái vô cùng xinh đẹp, duyên dáng và rạng rỡ đang mở tấm thiệp <b>20/10</b> này.<br>
+          Bạn đã sẵn sàng nhận lời chúc và phần quà may mắn chưa?
+        </p>
+        <div class="btn-group-prank">
+          <button class="btn-accept" id="btn-yes">Nhận quà 20/10 liền tay 🎁💖</button>
+          <button class="btn-runaway" id="btn-no">Hong nhận đâu, ngại lắm 😝</button>
+        </div>
+      </div>
+
+      <!-- BƯỚC 2: CHẠM ĐÁNH THỨC HOA HỒNG -->
+      <div id="stage-bloom">
+        <div class="radar-badge">🌷 ĐÁNH THỨC VƯỜN HOA 20/10</div>
+        <h2 class="intro-title">Chạm Để Hoa Nở Rộ</h2>
+        <p class="intro-desc">
+          Hãy chạm liên tiếp vào đóa hoa bên dưới để nạp đầy <b>100% Năng Lượng Xinh Đẹp & Hạnh Phúc</b> cho ngày 20/10 nhé!
+        </p>
+        <div class="crystal-rose-btn" id="rose-trigger">🌹</div>
+        <div class="love-progress-wrap">
+          <div class="love-progress-bar" id="love-bar"></div>
+        </div>
+        <div class="love-percent-text" id="love-percent">Năng lượng hạnh phúc: 0%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== THANH MENU TRÊN CÙNG ==================== -->
+  <div class="top-nav-wrapper">
+    <nav class="top-nav">
+      <a href="#sec-hero" class="active">🌸 Mở đầu</a>
+      <a href="#sec-vouchers">🎁 Xin vía 20/10</a>
+      <a href="#sec-gallery">🌷 Tôn vinh</a>
+      <a href="#sec-letter">💌 Lời chúc</a>
+    </nav>
+  </div>
+
+  <!-- NÚT NHẠC NẰM GÓC DƯỚI BÊN PHẢI (KHÔNG ĐÈ MENU) -->
+  <div class="music-fab" id="music-btn" title="Bật / Tắt nhạc">
+    <div class="music-disc"></div>
+  </div>
+
+  <!-- ==================== NỘI DUNG CHÍNH ==================== -->
+  <main>
+    <!-- 1. HERO -->
+    <section class="section-card" id="sec-hero">
+      <div class="emblem-ring">
+        <span class="crown-icon">👑</span>
+        <div class="emblem-inner">💐</div>
+      </div>
+      <div class="date-pill">✨ Happy Vietnamese Women's Day 20/10 ✨</div>
+      <h1 class="hero-title">Mừng Ngày Phái Đẹp Tỏa Sáng!</h1>
+      <p class="hero-quote">
+        Gửi lời chúc tốt đẹp nhất đến một nửa thế giới dịu dàng! Chúc bạn ngày 20/10 luôn rạng rỡ như hoa mùa xuân, nhan sắc thăng hạng, tiền bạc rủng rỉnh và ngập tràn tiếng cười bên những người thân yêu! 💖
+      </p>
+
+      <div class="stats-box">
+        <div class="stats-label">🌟 Chỉ số may mắn dành cho bạn ngày <span>20/10</span></div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num">1000%</div>
+            <div class="stat-unit">Xinh đẹp</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">999+</div>
+            <div class="stat-unit">May mắn</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">Vô cực</div>
+            <div class="stat-unit">Niềm vui</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">365</div>
+            <div class="stat-unit">Ngày tươi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. THẺ XIN VÍA MAY MẮN 20/10 -->
+    <section class="section-card" id="sec-vouchers">
+      <h2 class="section-heading">Rút Lộc & Xin Vía 20/10 🎟️</h2>
+      <p class="section-sub">Chạm vào từng thẻ bên dưới để nhận ngay đặc quyền may mắn hôm nay!</p>
+      <div class="voucher-grid" id="voucher-container"></div>
+    </section>
+
+    <!-- 3. GÓC TÔN VINH PHÁI ĐẸP -->
+    <section class="section-card" id="sec-gallery">
+      <h2 class="section-heading">Vẻ Đẹp Rạng Ngời 🌷</h2>
+      <p class="section-sub">Mỗi cô gái đều là một đóa hoa độc nhất và xứng đáng được trân trọng</p>
+      <div class="gallery-grid" id="gallery-container"></div>
+    </section>
+
+    <!-- 4. LỜI CHÚC TÂM THƯ 20/10 -->
+    <section class="section-card" id="sec-letter">
+      <h2 class="section-heading">Thiệp Chúc Mừng 20/10 💌</h2>
+      <p class="section-sub">Những lời chúc chân thành gửi đến tất cả chị em phụ nữ</p>
+      <div class="envelope-box">
+        <div class="letter-greeting">Gửi những bông hoa tuyệt vời nhất,</div>
+        <div class="letter-body" id="typewriter-text"></div>
+        <div class="letter-sign">Happy Women's Day 20/10! 💐✨</div>
+      </div>
+      <button class="btn-replay-fireworks" id="btn-fireworks">🎆 Bắn pháo hoa chúc mừng 20/10 🎆</button>
+    </section>
+  </main>
+
+  <script>
+    /* ============================================================
+       CẤU HÌNH NỘI DUNG DÀNH CHO MỌI NGƯỜI
+       ============================================================ */
+    const CONFIG = {
+      customMp3Url: "", // Điền "nhac.mp3" nếu bạn muốn chèn file nhạc riêng
+
+      // 4 Thẻ Xin Vía May Mắn cho mọi người bấm nhận
+      vouchers: [
+        {
+          icon: "👑",
+          title: "Vía Nhan Sắc Thăng Hạng",
+          desc: "Trẻ mãi không già, da đẹp dáng xinh, đi tới đâu tỏa sáng tới đó!"
+        },
+        {
+          icon: "💸",
+          title: "Vía Tiền Vô Như Nước",
+          desc: "Ví lúc nào cũng dày, học tập & công việc hanh thông, lương thưởng ngập tràn!"
+        },
+        {
+          icon: "🧋",
+          title: "Vía Ăn Ngon Không Béo",
+          desc: "Trà sữa full topping, ăn ngon khắp thế giới mà dáng vẫn chuẩn chỉnh!"
+        },
+        {
+          icon: "🍀",
+          title: "Vía Bình An & Hạnh Phúc",
+          desc: "Mọi muộn phiền tan biến, mỗi ngày thức dậy đều ngập tràn năng lượng tích cực!"
+        }
+      ],
+
+      // Bộ ảnh hoa & nghệ thuật tôn vinh phái đẹp (tự động hiển thị không cần tải ảnh riêng)
+      cards: [
+        {
+          url: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=600&q=80",
+          caption: "Luôn Xinh Đẹp & Tự Tin 🌸"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+          caption: "Độc Lập & Tỏa Sáng ✨"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80",
+          caption: "Dịu Dàng & Bản Lĩnh 🌷"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1464699908537-0954e50791ee?auto=format&fit=crop&w=600&q=80",
+          caption: "Rạng Rỡ Suốt 365 Ngày 👑"
+        }
+      ],
+
+      // Lời chúc chung ý nghĩa dành cho mọi người
+      letterContent:
+        "Nhân ngày Phụ nữ Việt Nam 20/10, xin gửi những lời chúc ngọt ngào và tốt đẹp nhất đến các bà, các mẹ, các chị em và những người bạn tuyệt vời! 🌷\n\n" +
+        "Cảm ơn một nửa thế giới vì đã luôn mang đến sự dịu dàng, ấm áp và nguồn cảm hứng tích cực cho cuộc sống này.\n\n" +
+        "Chúc bạn không chỉ trong ngày 20/10 hôm nay mà suốt 365 ngày trong năm đều luôn giữ vững nụ cười rạng rỡ trên môi, sức khỏe dồi dào, vạn sự hanh thông và gặt hái thật nhiều thành công trên con đường mình chọn!"
+    };
+
+    /* ============================================================
+       KHỞI TẠO DỮ LIỆU GIAO DIỆN
+       ============================================================ */
+    const voucherContainer = document.getElementById('voucher-container');
+    CONFIG.vouchers.forEach((v) => {
+      const card = document.createElement('div');
+      card.className = 'voucher-card';
+      card.innerHTML = `
+        <div class="voucher-icon">${v.icon}</div>
+        <div class="voucher-title">${v.title}</div>
+        <div class="voucher-desc">${v.desc}</div>
+        <span class="voucher-status">Chạm để xin vía ✨</span>
+      `;
+      card.addEventListener('click', () => {
+        card.classList.toggle('claimed');
+        const statusEl = card.querySelector('.voucher-status');
+        if (card.classList.contains('claimed')) {
+          statusEl.innerText = "Đã nhận vía thành công ✅";
+          confetti({ particleCount: 35, spread: 60, origin: { y: 0.75 } });
+        } else {
+          statusEl.innerText = "Chạm để xin vía ✨";
+        }
+      });
+      voucherContainer.appendChild(card);
+    });
+
+    const galleryContainer = document.getElementById('gallery-container');
+    CONFIG.cards.forEach((c) => {
+      const item = document.createElement('div');
+      item.className = 'polaroid';
+      item.innerHTML = `
+        <img src="${c.url}" alt="20/10 Card">
+        <div class="polaroid-caption">${c.caption}</div>
+      `;
+      galleryContainer.appendChild(item);
+    });
+
+    /* ============================================================
+       XỬ LÝ MÀN 1 & MÀN 2 BẤT NGỜ ĐẦU TRANG
+       ============================================================ */
+    const btnNo = document.getElementById('btn-no');
+    const btnYes = document.getElementById('btn-yes');
+    const stagePrank = document.getElementById('stage-prank');
+    const stageBloom = document.getElementById('stage-bloom');
+    const funnyNoTexts = [
+      "Ủa bấm nhầm nút rồi kìa 😆",
+      "Ai lại từ chối quà 20/10 bao giờ!",
+      "Nút này biết chạy trốn đó nha 🤣",
+      "Bấm nút màu hồng ở trên kìa 🌸",
+      "Xinh đẹp thế này là phải nhận quà!"
+    ];
+    let noCount = 0;
+
+    function moveRunawayButton() {
+      const x = (Math.random() - 0.5) * 160;
+      const y = (Math.random() - 0.5) * 90;
+      btnNo.style.transform = `translate(${x}px, ${y}px)`;
+      btnNo.innerText = funnyNoTexts[noCount % funnyNoTexts.length];
+      noCount++;
+    }
+
+    btnNo.addEventListener('mouseover', moveRunawayButton);
+    btnNo.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveRunawayButton();
+    });
+    btnNo.addEventListener('click', moveRunawayButton);
+
+    btnYes.addEventListener('click', () => {
+      stagePrank.style.display = 'none';
+      stageBloom.style.display = 'block';
+      confetti({ particleCount: 40, spread: 70, origin: { y: 0.6 } });
+    });
+
+    // Bước 2: Chạm hoa hồng tích năng lượng
+    let loveEnergy = 0;
+    const roseTrigger = document.getElementById('rose-trigger');
+    const loveBar = document.getElementById('love-bar');
+    const lovePercent = document.getElementById('love-percent');
+    const surpriseOverlay = document.getElementById('surprise-overlay');
+
+    roseTrigger.addEventListener('click', () => {
+      if (loveEnergy >= 100) return;
+      loveEnergy = Math.min(100, loveEnergy + 25);
+      loveBar.style.width = loveEnergy + '%';
+      lovePercent.innerText = `Năng lượng hạnh phúc: ${loveEnergy}%`;
+
+      confetti({
+        particleCount: 22,
+        spread: 55,
+        origin: { y: 0.55 },
+        colors: ['#ff4d8d', '#ffd166', '#ff9ebb']
+      });
+
+      if (loveEnergy >= 100) {
+        lovePercent.innerText = "💖 Đã mở khóa thiệp chúc mừng 20/10! 💖";
+        startBackgroundMusic();
+        setTimeout(() => {
+          surpriseOverlay.classList.add('hidden');
+          launchGrandFireworks();
+          startTypewriter();
+        }, 550);
+      }
+    });
+
+    /* ============================================================
+       HIỆU ỨNG GÕ CHỮ & PHÁO HOA
+       ============================================================ */
+    let typedStarted = false;
+    function startTypewriter() {
+      if (typedStarted) return;
+      typedStarted = true;
+      const target = document.getElementById('typewriter-text');
+      const text = CONFIG.letterContent;
+      let idx = 0;
+
+      function typeNext() {
+        if (idx <= text.length) {
+          target.innerText = text.slice(0, idx);
+          idx++;
+          setTimeout(typeNext, 24);
+        }
+      }
+      typeNext();
+    }
+
+    function launchGrandFireworks() {
+      const end = Date.now() + 2600;
+      const colors = ['#ff4d8d', '#ffd166', '#ff9ebb', '#ffffff'];
+      (function frame() {
+        confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 }, colors });
+        confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 }, colors });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    }
+
+    document.getElementById('btn-fireworks').addEventListener('click', launchGrandFireworks);
+
+    /* ============================================================
+       HỘP NHẠC TỰ ĐỘNG (HOẶC MP3 RIÊNG)
+       ============================================================ */
+    let audioCtx = null;
+    let isPlaying = false;
+    let melodyTimer = null;
+    let customAudio = CONFIG.customMp3Url ? new Audio(CONFIG.customMp3Url) : null;
+    if (customAudio) customAudio.loop = true;
+
+    const musicBtn = document.getElementById('music-btn');
+
+    function playRomanticMelody() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const notes = [523.25, 659.25, 783.99, 1046.5, 783.99, 659.25, 587.33, 698.46, 880.0, 698.46];
+      let step = 0;
+
+      melodyTimer = setInterval(() => {
+        if (!isPlaying) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.45);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.48);
+        step++;
+      }, 420);
+    }
+
+    function startBackgroundMusic() {
+      isPlaying = true;
+      musicBtn.classList.add('playing');
+      if (customAudio) {
+        customAudio.play().catch(() => {});
+      } else {
+        playRomanticMelody();
+      }
+    }
+
+    musicBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      musicBtn.classList.toggle('playing', isPlaying);
+      if (customAudio) {
+        isPlaying ? customAudio.play() : customAudio.pause();
+      } else if (isPlaying && !melodyTimer) {
+        playRomanticMelody();
+      }
+    });
+
+    /* ============================================================
+       CANVAS CÁNH HOA RƠI LẤP LÁNH
+       ============================================================ */
+    const canvas = document.getElementById('petal-canvas');
+    const ctx = canvas.getContext('2d');
+    let petals = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 28; i++) {
+      petals.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 6 + 5,
+        speedY: Math.random() * 0.9 + 0.4,
+        speedX: Math.random() * 0.6 - 0.3,
+        angle: Math.random() * Math.PI * 2,
+        spin: (Math.random() - 0.5) * 0.02
+      });
+    }
+
+    function drawPetals() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      petals.forEach((p) => {
+        p.y += p.speedY;
+        p.x += p.speedX + Math.sin(p.angle) * 0.3;
+        p.angle += p.spin;
+
+        if (p.y > canvas.height + 20) {
+          p.y = -15;
+          p.x = Math.random() * canvas.width;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.fillStyle = 'rgba(255, 165, 200, 0.55)';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size, p.size * 0.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+      requestAnimationFrame(drawPetals);
+    }
+    drawPetals();
+  </script>
+</body>
+</html>
