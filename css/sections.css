@@ -1,0 +1,271 @@
+/* ============================================================
+   SECTIONS - HERO, VOUCHERS, GALLERY, THIỆP CHÚC MỪNG
+   ============================================================ */
+
+/* 1. HERO SECTION */
+.emblem-ring {
+  position: relative;
+  width: 145px;
+  height: 145px;
+  margin: 8px auto 20px;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(135deg, #ff4d8d, #ffd166, #ff9ebb);
+  box-shadow: 0 0 35px rgba(255, 77, 141, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emblem-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #5e1650, #240820);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4.2rem;
+  border: 3px solid #240820;
+}
+
+.crown-icon {
+  position: absolute;
+  top: -16px;
+  right: 6px;
+  font-size: 2.1rem;
+  transform: rotate(18deg);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+}
+
+.date-pill {
+  display: inline-block;
+  background: rgba(255, 209, 102, 0.14);
+  border: 1px solid rgba(255, 209, 102, 0.45);
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+}
+
+.hero-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.6rem;
+  background: linear-gradient(90deg, #ffd166, #ff9ebb, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.hero-quote {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: #f3d7e6;
+  margin-bottom: 24px;
+}
+
+/* BẢNG CHỈ SỐ HẠNH PHÚC 20/10 */
+.stats-box {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 192, 218, 0.18);
+  border-radius: 20px;
+  padding: 16px 12px;
+}
+
+.stats-label {
+  font-size: 0.84rem;
+  color: #f5c6dc;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.stats-label span {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.stat-item {
+  background: rgba(255, 77, 141, 0.15);
+  border: 1px solid rgba(255, 158, 187, 0.24);
+  border-radius: 14px;
+  padding: 10px 4px;
+}
+
+.stat-num {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.stat-unit {
+  font-size: 0.72rem;
+  color: #e6bfd2;
+  margin-top: 4px;
+}
+
+/* 2. THẺ XIN VÍA MAY MẮN 20/10 */
+.voucher-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.voucher-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,77,141,0.08));
+  border: 1px dashed rgba(255, 182, 210, 0.45);
+  border-radius: 18px;
+  padding: 16px 12px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.voucher-card:active {
+  transform: scale(0.96);
+}
+
+.voucher-card.claimed {
+  border-style: solid;
+  border-color: var(--gold);
+  background: linear-gradient(145deg, rgba(255, 209, 102, 0.2), rgba(255, 77, 141, 0.2));
+}
+
+.voucher-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.voucher-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffd166;
+  margin-bottom: 4px;
+}
+
+.voucher-desc {
+  font-size: 0.78rem;
+  color: #f3dce8;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.voucher-status {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: rgba(255, 77, 141, 0.3);
+  color: #ffc2d6;
+}
+
+.voucher-card.claimed .voucher-status {
+  background: var(--gold);
+  color: #2b0824;
+}
+
+/* 3. GÓC TÔN VINH PHÁI ĐẸP (POLAROID) */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.polaroid {
+  background: #fff;
+  padding: 8px 8px 14px;
+  border-radius: 14px;
+  color: #2b0b25;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.polaroid:nth-child(odd) {
+  transform: rotate(-2deg);
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.04);
+  z-index: 5;
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 9px;
+  margin-bottom: 8px;
+}
+
+.polaroid-caption {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #b51756;
+}
+
+/* 4. BỨC THƯ CHÚC MỪNG 20/10 */
+.envelope-box {
+  background: linear-gradient(160deg, #fff8fa 0%, #ffe3ee 100%);
+  color: #3a102d;
+  border-radius: 22px;
+  padding: 24px 20px;
+  text-align: left;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+.letter-greeting {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.85rem;
+  color: #c91860;
+  margin-bottom: 12px;
+}
+
+.letter-body {
+  font-size: 0.94rem;
+  line-height: 1.75;
+  color: #471637;
+  min-height: 150px;
+  white-space: pre-line;
+}
+
+.letter-sign {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: #c91860;
+  text-align: right;
+  margin-top: 16px;
+}
+
+.btn-replay-fireworks {
+  margin-top: 18px;
+  background: linear-gradient(135deg, #ff4d8d, #ff85a1);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 77, 141, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-replay-fireworks:active {
+  transform: scale(0.96);
+}

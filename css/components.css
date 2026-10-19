@@ -1,0 +1,100 @@
+/* ============================================================
+   COMPONENTS - MENU ĐIỀU HƯỚNG & NÚT PHÁT NHẠC
+   ============================================================ */
+
+/* THANH ĐIỀU HƯỚNG TRÊN CÙNG */
+.top-nav-wrapper {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  padding: 0 12px;
+  pointer-events: none;
+}
+
+.top-nav {
+  pointer-events: auto;
+  display: flex;
+  gap: 6px;
+  background: rgba(34, 8, 30, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  padding: 6px 10px;
+  border-radius: 99px;
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.top-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.top-nav a {
+  color: #f3dce8;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 99px;
+  white-space: nowrap;
+  transition: background 0.25s, color 0.25s;
+}
+
+.top-nav a.active,
+.top-nav a:hover {
+  background: linear-gradient(135deg, #ff4d8d, #ff758c);
+  color: #fff;
+}
+
+/* NÚT NHẠC NẰM GÓC DƯỚI BÊN PHẢI (KHÔNG ĐÈ MENU) */
+.music-fab {
+  position: fixed;
+  bottom: 22px;
+  right: 18px;
+  z-index: 120;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(45, 10, 38, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 140, 180, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(255, 77, 141, 0.4);
+}
+
+.music-disc {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff4d8d 22%, #1f081c 25%, #381030 60%, #140412 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: spinDisc 4s linear infinite;
+  animation-play-state: paused;
+}
+
+.music-fab.playing .music-disc {
+  animation-play-state: running;
+}
+
+.music-disc::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #ffd166;
+  border-radius: 50%;
+}
+
+@keyframes spinDisc {
+  100% { transform: rotate(360deg); }
+}

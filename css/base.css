@@ -1,0 +1,75 @@
+/* ============================================================
+   BASE & LAYOUT STYLES - CHÚC MỪNG 20/10
+   ============================================================ */
+
+:root {
+  --pink-primary: #ff4d8d;
+  --pink-light: #ff9ebb;
+  --gold: #ffd166;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 192, 218, 0.24);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(circle at top, #4d1342 0%, #260822 55%, #120311 100%);
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Canvas hiệu ứng cánh hoa rơi nền */
+#petal-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Khung bố cục chính */
+main {
+  position: relative;
+  z-index: 5;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 80px 18px 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.section-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.section-heading {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.15rem;
+  color: #ff9ebb;
+  margin-bottom: 6px;
+}
+
+.section-sub {
+  font-size: 0.86rem;
+  color: #dab5c8;
+  margin-bottom: 20px;
+}
